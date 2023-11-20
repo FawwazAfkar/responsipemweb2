@@ -28,13 +28,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
+<html lang="en" dir="ltr">
+    <head>
+        <title>Login</title>
+        <meta charset="utf-9">
+        <link rel="stylesheet" href="stylelogin.css">
+    </head>
+
 <body>
-    
+    <div class="login-box">
+        <h1>Login</h1>
+        <div class="textbox">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Username">
+        </div>
+        <div class="textbox">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password">
+        </div>
+        <input type="button" class="btn" value="Sign in">
+        <header>
+        <nav class="navigation">
+            <a href="#">News</a>
+            <a href="#">Team Profil</a>
+        </nav>
+    </header>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
