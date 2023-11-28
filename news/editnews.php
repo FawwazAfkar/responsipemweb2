@@ -38,7 +38,7 @@ if (isset($_POST['delete'])){
     if (isset($_POST['Upload'])){
         $title = $_POST['title'];
         $content = $_POST['content'];
-        $query = "UPDATE user SET title='$title', content='$content'";
+        $query = "UPDATE news SET title='$title', content='$content'";
         if(mysqli_query($conn,$query)){
             ?>
             <script>
