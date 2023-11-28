@@ -1,29 +1,29 @@
 <?php
 session_start();
-
+include 'koneksi.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include 'koneksi.php';
-
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $email = $_POST['email'];
 
     $query = "SELECT * FROM user WHERE username='$username'";
-    $result = mysqli_query($koneksi, $query);
+    $result = mysqli_query($conn, $query);
     
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        if (password_verify($password, $row['password'])) {
-            $_SESSION['username'] = $username;
-            $_SESSION['password'] = $password;
-            $_SESSION['email'] = $email;
-            header("Location: index.php");
+        if (password_verify($password, $row['password'])) { 
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['role'] = $row['role'];?>
+            <script>
+            alert('Login success!, Welcome <?php echo $username; ?>');
+            window.location.href='index.php';
+            </script>
+            <?php
             exit();
         } else {
-            echo "Password salah.";
+            echo "<script>alert('Cannot login, please try again');</script>";
         }
     } else {
-        echo "Username tidak ditemukan.";
+        echo "<script>alert('Cannot login, please try again');</script>";
     }
 }
 ?>
@@ -32,29 +32,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <head>
         <title>Login</title>
         <meta charset="utf-9">
-        <link rel="stylesheet" href="stylelogin.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles/logres.css">
+        <link rel="icon" href="assets/mancity.ico">
     </head>
-
 <body>
-    <div class="login-box">
-        <h1>Login</h1>
-        <div class="textbox">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username">
+    <div class="header">
+            <img src="assets/manchester.png" class="icon">
+            <div class="nav">
+                <a href="news/viewnews.php">HOME</a>
+                <a href="news/viewnews.php">NEWS</a>
+                <a href="teamprofile.php">TEAM PROFILE</a>
+            </div>
+    </div>
+    <div class="box">
+            <h1>SIGN IN</h1>
+            <form method="post">
+                <h6>username</h6>
+                <input class="input" type="text" name="username" placeholder="enter your username here">
+                <h6>password</h6>
+                <input class="input" type="password" name="password" placeholder="enter your password here"><br>
+                <button class="tombol" type="submit" id="signin">SIGN IN</button>  
+            
+                <p>Don't have the account? <a href="register.php">Sign Up here</a></p>
+            </form>
         </div>
-        <div class="textbox">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password">
-        </div>
-        <input type="button" class="btn" value="Sign in">
-        <header>
-        <nav class="navigation">
-            <a href="#">News</a>
-            <a href="#">Team Profil</a>
-        </nav>
-    </header>
-
-    <script src="script.js"></script>
+    <div class="footer"></div>
 </body>
 
 </html>

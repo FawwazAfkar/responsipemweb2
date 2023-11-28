@@ -1,7 +1,8 @@
 <?php
     session_start();
     include ("../koneksi.php");
-    $read = mysqli_query($conn, "SELECT * FROM news ORDER BY id ASC");
+    $id=$_GET['id'];
+    $read = mysqli_query($conn, "SELECT * FROM news where id=$id");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,21 +38,18 @@
                 while($berita = mysqli_fetch_array($read)){
                     echo '<tr><td><h2>'.$berita['title'].'</h2></td></tr>';
                     echo '<tr><td><img src="' . $berita['image'] . '" width="300"></td></tr>';
-                    echo "<tr><td><a href='editnews.php?id=$berita[id]'>Edit</a> | <a href='deletenews.php?id=$berita[id]'>Delete</a></td></tr>";
                     echo "<tr><td style='white-space: pre-wrap;'>".$berita['content']."</td></tr>";
-                    echo "<tr><td><a href='readnews.php?id=$berita[id]'>read more</a>";
+                    echo "<tr><td><a href='editnews.php?id=$berita[id]'>Edit</a> | <a href='deletenews.php?id=$berita[id]'>Delete</a></td></tr>";
                 }
                 ?>
             </table>
             <?php else : ?>
+            <!-- Visitors Access -->
             <table>
                 <?php
-                while($berita = mysqli_fetch_array($read)){
                     echo '<tr><td><h2>'.$berita['title'].'</h2></td></tr>';
                     echo '<tr><td><img src="' . $berita['image'] . '" width="300"></td></tr>';
-                    echo "<tr><td style='white-space: pre-wrap;'>".$berita['content']."</td></tr>";
-                    echo "<tr><td><a href='readnews.php?id=$berita[id]'>read more</a>";
-                }
+                    echo "<tr><td style='white-space: pre-wrap;'>".$berita['content']."</td></tr>";          
                 ?>
             </table>
             <?php endif; ?>

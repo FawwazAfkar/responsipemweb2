@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE AND E_DEPRECATED);
+//error_reporting(E_ALL ^ E_NOTICE AND E_DEPRECATED);
 $host = 'localhost';
 $user = 'root';
 $pass = '';

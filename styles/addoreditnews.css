@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #CEE0ED;
+    width: 100%;
+    height: 100vh;
+}
+
+.header {
+    width: 100%;
+    height: 7%;
+    background: #569CCF;
+}
+
+.icon {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.nav {
+    position: relative;
+    left: 60%;
+    height: 60%;
+    width: 40%;
+    bottom: 80%;
+}
+
+.nav a {
+    position: relative;
+    top: 20%;
+    color: #fff;
+    margin-left: 45px;
+    text-decoration: none;
+    font-family: Montserrat;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+.nav svg {
+    width: 5%;
+    height: 50%;
+}
+.box  {
+    border-radius: 20px;
+    background: #569CCF;
+    width: 60%;
+    height: 60%;
+    position: relative;
+    top: 10%;
+    left: 20%;
+}
+.content {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    color: #FFF;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: #569CCF;
+    height: auto;
+    margin: 5% auto;
+    border-radius: 20px;
+    padding-bottom: 10px;
+}
+
+.content h1 {
+    font-size: 40px;
+    position: relative;
+    /* bottom: 50%; */
+    left: 5%;
+    margin-top: 3%;
+}
+form label {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+}
+form .label1 {
+    font-size: 18px;
+    position: relative;
+    top: 10%;
+    left: 5%;
+    margin-bottom: 50px;
+}
+
+form input {
+    border: none;
+    background: transparent;
+    border-bottom-style: solid;
+    width: 90%;
+    position: relative;
+    left: 5%;
+    color: #FFF;
+    outline: none;
+}
+form textarea{
+    border: none;
+    background: transparent;
+    border-bottom-style: solid;
+    width: 90%;
+    position: relative;
+    left: 5%;
+    color: #FFF;
+    outline: none;
+    overflow: auto;
+    top: 50%;
+    row: 50;
+}
+form input::placeholder {
+    color: #fff;
+}
+
+form .input1 {
+    position: relative;
+    top: 20%;
+    font-size: medium;
+    font-family: Montserrat;
+}
+
+form .input2 {
+    position: relative;
+    top: 50%;
+    font-size: medium;
+    font-family: Montserrat;
+    /* bottom: 100%; */
+    /* height: 100%; */
+    overflow: auto;
+}
+
+form .label2 {
+    font-size: 18px;
+    position: relative;
+    top: 15%;
+    left: 5%;
+    margin-bottom: 50px;
+}
+
+form button {
+    border-radius: 30px;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border: none;
+    height: 10%;
+    position: relative;
+    top: 40%;
+    cursor: pointer;
+}
+
+form input[type="file"] {
+    display: none;
+}
+form .custom-file-upload {
+    background: #194769;
+    width: 15%;
+    position: relative;
+    margin-top: 10%;
+    left: 70%;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    /* height: 5%; */
+}
+form .add-picture {
+    background: #387CAE;
+    width: 10%;
+    position: relative;
+    top: 5%;
+    left: 5%;
+}
+
+form .upload {
+    background: #194769;
+    width: 15%;
+    position: relative;
+    margin-top: 5px;
+    left: 70%;
+    cursor: pointer;
+}
+form .delete{
+    background: #194769;
+    width: 15%;
+    position: relative;
+    top: 5%;
+    left: 70%;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+form .cancel{
+    background: #194769;
+    width: 15%;
+    position: relative;
+    top: 5%;
+    left: 70%;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.footer {
+    opacity: 0.8;
+    background: #387CAE;
+    width: 100%;
+    height: 5%;
+    position:absolute;
+    width:100%;
+    bottom:0px;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+}

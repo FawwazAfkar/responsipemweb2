@@ -2,61 +2,48 @@
 session_start();
 include '../koneksi.php';
 
-$id = $_GET['id'];
-$query = "SELECT * FROM news WHERE id=$id";
-$result = mysqli_query($conn,$query);
-
-if(mysqli_num_rows($result) > 0){   
-    $row = mysqli_fetch_assoc($result);
-}
-if (isset($_POST['cancel'])){
-    ?>
-    <script>
-                let text = "Discard your changes?";
-                if (confirm(text) == true) {
-                    window.location.replace('viewnews.php');
-                } else {
-                    alert("Thank you for your confirmation");
-                }
-    </script> 
-    <?php
-}
-if (isset($_POST['delete'])){
-    ?>
-    <script>
-                let txt = "Delete this news?";
-                if (confirm(text) == true) {
-                    <?php
-                    header("Location: deletenews.php?id=$id")
-                    ?>
-                } else {
-                    alert("Thank you for your confirmation");
-                }
-    </script> 
-    <?php
-}
-    if (isset($_POST['Upload'])){
-        $title = $_POST['title'];
-        $content = $_POST['content'];
-        $query = "UPDATE user SET title='$title', content='$content'";
-        if(mysqli_query($conn,$query)){
-            ?>
-            <script>
-                    alert("Your news is updated");
-                    window.location.replace("viewnews.php");
-            </script> 
-            <?php
-        }else{
-            ?>
-            <script>
-                    alert("an error occured while updating news");
-                    window.location.replace("viewnews.php");
-            </script> 
-            <?php
-        }
+if(isset($_POST['Upload'])) {
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    //upload image
+    $target_dir = "images/"; 
+    $target_file = $target_dir . basename($_FILES["image"]["name"]); // Path file gambar yang di-upload
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); // Jenis file gambar
     
+    // Check 
+    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    if($check !== false) {
+        if (file_exists($target_file)) {
+            echo "file already exist.";
+        } else {
+            // Upload file
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                // Jika berhasil upload, tambahkan data ke database
+                $sql = "INSERT INTO news (title, content, image) VALUES ('$title', '$content', '$target_file')";
+                if (mysqli_query($conn, $sql)) {
+                    ?><script>
+                        alert("Upload success");
+                        window.location.href = "viewnews.php";
+                    </script>
+                    <?php 
+                } else {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
+            } else {
+                ?><script>
+                alert("error uploading files");
+                </script>
+                <?php 
+            }
+        }
+    } else {
+        ?><script>
+        alert("only image file allowed");
+        </script>
+        <?php 
     }
-
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +52,7 @@ if (isset($_POST['delete'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/addoreditnews.css">
     <link rel="icon" href="assets/mancity.ico">
-    <title>EDIT</title>
+    <title>ADD NEWS</title>
 </head>
 <body>
     <div class="header">
@@ -82,18 +69,18 @@ if (isset($_POST['delete'])){
             </div>
         </div>
         <div class="content">
-            <h1>EDIT NEWS</h1>
+            <h1>UPLOAD NEWS</h1>
             <form class="content" method="post" enctype="multipart/form-data">
                 <label for="title" class="label1">Title</label><br>
-                <input type="text" name="title" class="input1" value="<?php echo $row['title']; ?>"><br>
+                <input type="text" name="title" placeholder="input your title here" class="input1"><br>
                 <label for="content" class="label2">Content</label><br>
-                <textarea input type="text" name="content" class="input2"><?php echo $row['content']; ?></textarea>
-                <button type="submit" name="Upload" value="upload" class="upload">EDIT</button>
-                <button name="cancel" value="cancel" class="cancel">CANCEL</button>
-                <button name="delete" value="delete" class="delete">DELETE</button>
+                <textarea input type="text" name="content" placeholder="Write your text here" class="input2"></textarea>
+                <label class="custom-file-upload">
+                <input type="file" name="image" accept=".jpg, .png" class="upload">ADD PICTURE</button>
+                </label>
+                <button type="submit" name="Upload" value="upload" class="upload">UPLOAD CONTENT</button>
             </form>
         </div>
-        
         <div class="footer"></div>
 </body>
 </html>
