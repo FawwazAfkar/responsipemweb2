@@ -76,7 +76,7 @@ if(isset($_POST['Upload'])) {
                 <label for="content" class="label2">Content</label><br>
                 <textarea input type="text" name="content" placeholder="Write your text here" class="input2"></textarea>
                 <label class="custom-file-upload">
-                <input type="file" name="image" accept=".jpg, .png" class="upload">ADD PICTURE</button>
+                <input type="file" name="image" accept=".jpg, .png" class="upload">ADD PICTURE
                 </label>
                 <button type="submit" name="Upload" value="upload" class="upload">UPLOAD CONTENT</button>
             </form>
