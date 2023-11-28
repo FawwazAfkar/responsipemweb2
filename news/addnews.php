@@ -72,15 +72,23 @@ if(isset($_POST['Upload'])) {
             <h1>UPLOAD NEWS</h1>
             <form class="content" method="post" enctype="multipart/form-data">
                 <label for="title" class="label1">Title</label><br>
-                <input type="text" name="title" placeholder="input your title here" class="input1"><br>
+                <input type="text" name="title" placeholder="input your title here" class="input1" oninput="validateAndReplace(this)"><br>
                 <label for="content" class="label2">Content</label><br>
-                <textarea input type="text" name="content" placeholder="Write your text here" class="input2"></textarea>
+                <textarea input type="text" name="content" placeholder="Write your text here" class="input2" oninput="validateAndReplace(this)"></textarea>
                 <label class="custom-file-upload">
-                <input type="file" name="image" accept=".jpg, .png" class="upload">ADD PICTURE</button>
+                <input type="file" name="image" accept=".jpg, .png" class="upload">ADD PICTURE
                 </label>
                 <button type="submit" name="Upload" value="upload" class="upload">UPLOAD CONTENT</button>
             </form>
         </div>
-        <div class="footer"></div>
+        <script> 
+            function validateAndReplace(input) {   
+            if(input.value.match(/["']/g)){
+                alert("Input cannot contain quotes");
+                input.value = input.value.replace(/["']/g, '');
+            }
+                    }
+        </script>
+       
 </body>
 </html>
