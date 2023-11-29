@@ -2,14 +2,16 @@
     session_start();
     include ("../koneksi.php");
     $read = mysqli_query($conn, "SELECT * FROM news ORDER BY id ASC");
-?>
+    $row = mysqli_fetch_assoc($read);
+    $content = $row['content'];
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/news.css">
-    <link rel="icon" href="assets/mancity.ico">
+    <link rel="icon" href="../assets/mancity.ico">
     <title>BERITA TERKINI</title>
 </head>
 <body>
@@ -31,31 +33,35 @@
             <h1>TODAY NEWS</h1>
             <?php if ($_SESSION['role'] === 'admin') : ?>
             <!-- Admin Only -->
-            <a href="addnews.php">Add Post</a>
+            <a href="addnews.php">Add Post</a><br><br>
             <table>
                 <?php
                 while($berita = mysqli_fetch_array($read)){
                     echo '<tr><td><h2>'.$berita['title'].'</h2></td></tr>';
                     echo '<tr><td><img src="' . $berita['image'] . '" width="300"></td></tr>';
-                    echo "<tr><td><a href='editnews.php?id=$berita[id]'>Edit</a> | <a href='deletenews.php?id=$berita[id]'>Delete</a></td></tr>";
-                    echo "<tr><td style='white-space: pre-wrap;'>".$berita['content']."</td></tr>";
-                    echo "<tr><td><a href='readnews.php?id=$berita[id]'>read more</a>";
+                    echo "<tr><td style='white-space: pre-wrap;'>".substr($berita['content'], 0, strpos($berita['content'], '.') + 1)."</td></tr>";
+                    echo "<tr><td><a href='readnews.php?id=$berita[id]'>read more</a></td></tr>";
+                    echo "<tr><td<br></td></tr>";
+                    echo "<tr><td><br></td></tr>";
                 }
                 ?>
             </table>
+            <br><br>
             <?php else : ?>
             <table>
                 <?php
                 while($berita = mysqli_fetch_array($read)){
                     echo '<tr><td><h2>'.$berita['title'].'</h2></td></tr>';
                     echo '<tr><td><img src="' . $berita['image'] . '" width="300"></td></tr>';
-                    echo "<tr><td style='white-space: pre-wrap;'>".$berita['content']."</td></tr>";
-                    echo "<tr><td><a href='readnews.php?id=$berita[id]'>read more</a>";
+                    echo "<tr><td style='white-space: pre-wrap;'>".substr($berita['content'], 0, strpos($berita['content'], '.') + 1)."</td></tr>";
+                    echo "<tr><td><a href='readnews.php?id=$berita[id]'>read more</a></td></tr>";
+                    echo "<tr><td><br></td></tr>";
+                    echo "<tr><td><br></td></tr>";
                 }
                 ?>
             </table>
+            <br><br>
             <?php endif; ?>
         </div>
-<div class="footer"></div>
 </body>
 </html>
