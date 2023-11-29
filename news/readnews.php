@@ -10,15 +10,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/news.css">
-    <link rel="icon" href="assets/mancity.ico">
+    <link rel="icon" href="../assets/mancity.ico">
     <title>BERITA TERKINI</title>
 </head>
 <body>
 <div class="header">
             <img src="../assets/manchester.png" class="icon">
             <div class="nav">
-                <a href="#">HOME</a>
-                <a href="#">NEWS</a>
+                <a href="viewnews.php">HOME</a>
+                <a href="viewnews.php">NEWS</a>
                 
                 <a href="../teamprofile.php">TEAM PROFILE</a>
                 <a href="../myprofile.php">
@@ -29,27 +29,28 @@
             </div>
         </div>
         <div class="content">
-            <h1>TODAY NEWS</h1>
             <?php if ($_SESSION['role'] === 'admin') : ?>
             <!-- Admin Only -->
-            <a href="addnews.php">Add Post</a>
+            <center>
             <table>
                 <?php
                 while($berita = mysqli_fetch_array($read)){
                     echo '<tr><td><h2>'.$berita['title'].'</h2></td></tr>';
-                    echo '<tr><td><img src="' . $berita['image'] . '" width="300"></td></tr>';
+                    echo '<tr><td><img src="' . $berita['image'] . '" width="400px"></td></tr>';
                     echo "<tr><td style='white-space: pre-wrap;'>".$berita['content']."</td></tr>";
                     echo "<tr><td><a href='editnews.php?id=$berita[id]'>Edit</a> | <a href='deletenews.php?id=$berita[id]'>Delete</a></td></tr>";
                 }
                 ?>
-            </table>
+            </table></center>
             <?php else : ?>
             <!-- Visitors Access -->
             <table>
                 <?php
+                while($berita = mysqli_fetch_array($read)){
                     echo '<tr><td><h2>'.$berita['title'].'</h2></td></tr>';
-                    echo '<tr><td><img src="' . $berita['image'] . '" width="300"></td></tr>';
-                    echo "<tr><td style='white-space: pre-wrap;'>".$berita['content']."</td></tr>";          
+                    echo '<tr><td><img src="' . $berita['image'] . '" width="400px"></td></tr>';
+                    echo "<tr><td style='white-space: pre-wrap;'>".$berita['content']."</td></tr>"; 
+                }
                 ?>
             </table>
             <?php endif; ?>
